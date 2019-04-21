@@ -3,14 +3,14 @@ action = "\nВарианты:\n'1' - добавить новую книгу\n'2'
 
 def list_books():
     with open(books_file, 'r') as file:
-        lines = [line.strip().split(',') for line in file.readlines()]
+        lines = [line.strip().split(';') for line in file.readlines()]
     return [
         {'Название': line[0], 'Автор': line[1], 'Описание': line[2]}
         for line in lines
     ]
 def add_book(name, author, descr):
     with open(books_file, 'a') as file:
-        file.write(f'{name},{author}, {descr}\n')
+        file.write(f'{name};{author}; {descr}\n')
 
 def edit_book(e_name):
     books = list_books()
@@ -31,7 +31,7 @@ def edit_book(e_name):
 def save_all_books(books):
     with open(books_file, 'w') as file:
         for book in books:
-            file.write(f"{book['Название']},{book['Автор']},{book['Описание']}\n")
+            file.write(f"{book['Название']};{book['Автор']};{book['Описание']}\n")
 
 # def delete_book(name):
 #     for book in books:
@@ -53,7 +53,7 @@ def add_book_handler():
     add_book(name, author, descr)
 
 def edit_book_handler():
-    e_name = input('Введите название книги, которую вы хотите удалить: ')
+    e_name = input('Введите название книги, которую вы хотите отредактировать: ')
 
     edit_book(e_name)
 
