@@ -15,9 +15,13 @@ def add_book(name, author, descr):
 def edit_book(e_name):
     books = list_books()
     book = [book for book in books if book['Название'] == e_name]
+    if book == []:
+        print(f"Такой книги нет в бибилиотеке")
+        edit_book_handler()
+
     print(f"Книга была сохранена в таком виде:\n {book}")
     answer = list((input('Нужно исправить? [Д]а? [Н]ет: ')).lower().split())[0]
-    if answer == 'n':
+    if answer == 'н':
         lib()
     else:
         delete_book(e_name)
